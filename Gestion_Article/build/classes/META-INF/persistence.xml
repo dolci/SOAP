@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="Java Persistence API: XML Schemas"
+xmlns:xsi="Page on w3.org"
+xsi:schemaLocation="Java Persistence API: XML Schemas Page on sun.com"
+version="1.0">
+
+<persistence-unit name="Unitgestion">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <jta-data-source>java:jboss/datasources/gestion</jta-data-source>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
