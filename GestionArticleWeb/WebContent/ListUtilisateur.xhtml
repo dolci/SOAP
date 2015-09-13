@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+ <h:form id="form1">
+ <p:growl id="msgs" showDetail="true"/> 
+         
+    <p:dataTable value="#{utilisateurManagedBean.listUser}" var="usr" editable="true"
+     rowEditListener="#{utilisateurManagedBean.onEdit()}"
+     >
+     
+     <p:ajax event="rowEdit"  actionlistener="#{utilisateurManagedBean.onEdit}" update=":form:form1:msgs"/>
+     <p:ajax event="rowEditCancel" listener="#{utilisateurManagedBean.onCancel}" update=":form:form1:msgs" />
+    <f:facet name="header">  
+           Liste de Utilisateurs 
+        </f:facet> 
+        <p:column headerText="Nom" style="width:120px">
+           <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{usr.nom}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{usr.nom}" />  
+                </f:facet>  
+            </p:cellEditor> 
+       <!-- <h:outputText value="#{clt.cin}"></h:outputText> --> 
+    </p:column>
+    <p:column headerText=" Prenom" style="width:80px" >
+        <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{usr.prenom}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{usr.prenom}"/>  
+                </f:facet>  
+            </p:cellEditor> 
+       <!-- <h:outputText value="#{clt.nom}"></h:outputText> --> 
+    </p:column>
+    <p:column headerText=" Email" style="width:270px">
+        <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{usr.email}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{usr.email}"/>  
+                </f:facet>  
+            </p:cellEditor> 
+      <!-- <h:outputText value="#{clt.prenom}"></h:outputText>  -->  
+    </p:column>
+    
+    
+    <p:column headerText=" Role" style="width:70px">
+        <p:cellEditor>  
+                <f:facet name="output">  
+                    <h:outputText value="#{usr.role}" />  
+                </f:facet>  
+                <f:facet name="input">  
+                    <p:inputText value="#{usr.role}" />  
+                </f:facet>  
+            </p:cellEditor> 
+       <!-- <h:outputText value="#{clt.adresse}"></h:outputText> --> 
+    </p:column>
+    <p:column headerText="Options">   
+            <p:commandButton icon="ui-icon-trash" title="Delete" action="#{utilisateurManagedBean.delete(clt)}"  style="border-width:0;background:none;"/>          
+             <p:rowEditor />
+         
+        </p:column>  
+        
+</p:dataTable>
+</h:form>
+</ui:composition>

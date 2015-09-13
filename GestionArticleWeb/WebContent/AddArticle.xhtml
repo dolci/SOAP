@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+    <p:panel id="panel" header="Add Article" style="margin-bottom:10px;">
+        <p:messages id="messages" />
+        <h:panelGrid columns="3" cellpadding="5">
+            <p:outputLabel for="ref" value="Reference:" />
+            <p:inputText id="ref" value="#{articleManagedBean.selectedArticle.reference}" required="true" label="REF">
+                <f:validateLength minimum="4" />
+            </p:inputText>
+            <p:message for="ref" />
+ 
+            <p:outputLabel for="libelle" value="Libellé:" />
+            <p:inputText id="libelle" value="#{articleManagedBean.selectedArticle.libelle}" required="true" label="libelle"/>
+            <p:message for="libelle" />
+            
+            <p:outputLabel for="prix" value="Prix:" />
+            <p:inputText id="prix" value="#{articleManagedBean.selectedArticle.prix}" required="true" label="prix"/>
+            <p:message for="prix" />
+            
+            <p:outputLabel for="qte" value="Quantite:" />
+            <p:inputText id="qte" value="#{articleManagedBean.selectedArticle.quantite}" required="true" label="qte"/>
+            <p:message for="qte" />
+            
+            <p:outputLabel for="tva" value="TVA:" />
+            <p:inputText id="tva" value="#{articleManagedBean.selectedArticle.tva}" required="true" label="tva"/>
+            <p:message for="tva" />
+        </h:panelGrid>
+       
+       
+    </p:panel>
+    
+     <p:commandButton actionListener="#{articleManagedBean.createArticle()}" update="panel"
+                value="Save" icon="ui-icon-check" style="margin:0" />
+            
+      
+
+</ui:composition>

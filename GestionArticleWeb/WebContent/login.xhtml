@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <title>Authentification</title>
+</h:head>
+<h:body>
+
+<h:form id="form">
+
+ <p:growl id="growl" sticky="true" showDetail="true" life="3000" /> 
+<center>         
+     <p:panel id="loginPanel" header ="Login" style="margin-top:10%;width:450px;">  
+       
+          <h:panelGrid columns="3" cellpadding="5" >    
+                 <p:outputLabel  for ="login" value="login :"/>
+                 <p:inputText id="login" value="#{utilisateurManagedBean.userSession.login}" required="true" label="Login">
+                                <f:validateLength minimum="4" />
+                   </p:inputText>
+                       <p:message for="login" display="icon" />
+    
+                  <p:outputLabel  for ="password" value="Mot de passe "/> 
+                  <p:password id="password" value="#{utilisateurManagedBean.userSession.password}" required="true" label="password">
+                                 <f:validateLength minimum="5" />
+                                 <p:ajax update="passwordUtil" event="keyup" />
+                  </p:password>
+   
+                              <p:message for="password"  id="passwordUtil" display="icon" />
+                          
+                 <p:commandButton value="Login"  action="#{utilisateurManagedBean.loginProject()}" update="growl" />
+                
+    </h:panelGrid>
+    </p:panel>
+ </center>
+  
+</h:form>
+
+</h:body>
+</html>

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <title>Gestion Articles</title>
+   
+</h:head>
+    <h:body>
+    
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="0"> <center><p> <b style="FONT-FAMILY: 'Elephant'; COLOR: #008000;">Gestion des articles</b> </p></center></p:layoutUnit>
+            <p:layoutUnit position="west" size="200">
+
+                <p:panel header="Utilisateur"  style="width: 97%;text-align: center;height: auto;">  
+                      Bienvenue:<br> </br>
+                        <h:outputText id ="authen" value="#{utilisateurManagedBean.user.nom}" style="text-transform: capitalize;color: #045491;"/><p:spacer width="10"/>
+                         <h:outputText  value="#{utilisateurManagedBean.user.prenom}" style="text-transform: capitalize;color: #045491;"/>
+                        <br></br>
+                        <h:form> <h:commandLink actionListener="#{utilisateurManagedBean.logout()}" value="Déconnexion" ></h:commandLink>
+                                 </h:form>           
+                </p:panel>
+                   <p:spacer width="20px"/>  
+                <h:form>
+                   
+                     <p:panelMenu style="width:200px">
+                         <p:submenu label="Articles">
+                             <p:menuitem value="Add" action="#{menuController.doViewAddArticles()}"  update=":form" icon="ui-icon-disk" />
+                             <p:menuitem value="Liste" action="#{menuController.doViewListArticles()}" update=":form"  icon="ui-icon-arrowrefresh-1-w" />
+                         </p:submenu>
+                         <p:submenu label="Utilisateur">
+                             <p:menuitem value="Add"   action="#{menuController.doViewUtilisateur()}" update=":form"  icon="ui-icon-disk"/>
+                             <p:menuitem value="List" action="#{menuController.doViewListUtilisateur()}"  update=":form" icon="ui-icon-add"/>
+                         </p:submenu>
+                         <p:separator />
+       
+                      </p:panelMenu>
+                       <p:spacer width="20px"/>
+
+                
+                </h:form>
+                
+            </p:layoutUnit>
+            <p:layoutUnit  id ="frm" position="center">
+               
+                   <h:form id="form">
+                    <p:growl autoUpdate="true"/>
+                           <ui:include src="#{menuController.page}.xhtml" />
+                          
+                 </h:form>
+                
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="60">footer</p:layoutUnit>
+        </p:layout>
+    </h:body>
+
+</html>

@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+  
+  
+  
+<f:view>
+         
+     <p:growl id="msgs" showDetail="true" sticky="true" />           
+    <p:dataTable id ="tb" value="#{articleManagedBean.listArticle}" var="art" editable="true"
+     paginator="true"   rows="5"  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15" 
+          rowKey="#{art.reference}"   selectionMode="single" >
+     
+    
+    <f:facet name="header">  
+           Liste de Clients 
+        </f:facet> 
+        <p:column headerText="Reference " style="width:30%;text-align: center;">
+            
+                 
+                    <h:outputText value="#{art.reference}" />  
+                      
+       
+    </p:column>
+    <p:column headerText=" Libelle" style="width:30%;text-align: center;">
+       
+                
+                    <h:outputText value="#{art.libelle}" />                
+            
+    </p:column>
+    <p:column headerText=" Prix" style="width:30%;text-align: center;">
+       
+                
+                    <h:outputText value="#{art.prix}" />  
+                
+                
+            
+      
+    </p:column>
+    
+    
+    <p:column headerText=" Quantite" style="width:30%;text-align: center;">
+       
+                
+                    <h:outputText value="#{art.quantite}" />  
+                
+                
+            
+      
+    </p:column>
+      
+         <p:column style="width:80px;text-align: center;">  
+
+                    <f:facet name="header">Modifier</f:facet>
+                    <p:commandButton update=":form:display" onclick="PF('dlg').show();" icon="ui-icon-pencil" title="Modifier" >  
+                        <f:setPropertyActionListener value="#{art}" target="#{articleManagedBean.selectedArticle}"  />  
+
+                     </p:commandButton>  
+
+          </p:column>  
+                <p:column style="width:80px;text-align: center;">  
+
+                    <f:facet name="header">Supprimer</f:facet>
+                        <p:commandButton icon="ui-icon-trash" onclick="PF('dlg1').show();" update=":form:display1"  >
+                        <f:setPropertyActionListener value="#{art}" target="#{articleManagedBean.selectedArticle}"  />  
+
+
+                    </p:commandButton> 
+                </p:column>  
+        
+       
+</p:dataTable>
+
+ <p:dialog  header="Plus D' information" widgetVar="dlg"  width="400" modal="true" appendTo="@(body)" resizable="false" >
+           
+                <center>
+                
+                    <h:panelGrid id="display" columns="2" cellpadding="4" >  
+                 
+                        <f:facet name="header">  
+                            <h1> Modification d'un Aticle </h1>
+                        </f:facet>  
+
+                        <p:outputLabel value="Ref article"  />  
+                        <p:outputLabel  value="#{articleManagedBean.selectedArticle.reference}" /> 
+                        <p:outputLabel value="Libellé"  />  
+                        <p:inputText  value="#{articleManagedBean.selectedArticle.libelle}" />  
+                        <p:outputLabel value="Prix"  />  
+                        <p:inputText  value="#{articleManagedBean.selectedArticle.prix}" /> 
+                        <p:outputLabel value="Quantite"  />  
+                        <p:inputText  value="#{articleManagedBean.selectedArticle.quantite}" /> 
+                        <p:commandButton value="Enregistrer"  action="#{articleManagedBean.update}" process="display" update=":form:tb,:form:msgs" icon="ui-icon-disk" oncomplete="PF('dlg').hide();" />
+                        <p:commandButton value="Annuler"  action="#{articleManagedBean.annuler}" update=":form:tb" oncomplete="PF('dlg').hide();"/>
+                 
+                    </h:panelGrid>  
+                </center>
+                
+            </p:dialog> 
+  
+            <p:confirmDialog message="Vous Voulez Vraiment Supprimer cet Article ?" appendTo="@(body)"  header="Suppression Article" severity="alert" widgetVar="dlg1"  >  
+                <center>
+                    <h:panelGrid id="display1" columns="2" cellpadding="4" >  
+
+                        <p:outputLabel value="Ref article"  />  
+                        <p:outputLabel  value="#{articleManagedBean.selectedArticle.reference}" /> 
+                        <p:outputLabel value="Libellé"  />  
+                        <p:inputText  value="#{articleManagedBean.selectedArticle.libelle}" />  
+                        
+                      <p:commandButton value="Supprimer" action="#{articleManagedBean.supprimer}" icon="ui-icon-trash" update=":form:tb" oncomplete="PF('dlg1').hide();"/>
+                        <p:commandButton value="Annuler" action="#{articleManagedBean.annuler}" update=":form:tb" oncomplete="PF('dlg1').hide();"/>
+
+                    </h:panelGrid>  
+                </center>
+            
+            </p:confirmDialog> 
+            <p:dialog modal="true" widgetVar="statusDialog" header="Status"   
+                      draggable="false" closable="false">  
+                <p:graphicImage value="/images/ajax.gif" />  
+            </p:dialog>  
+
+            
+</f:view>
+            
+ 
+
+</ui:composition>
